@@ -84,14 +84,15 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
                     sai9.appendChild(icones);
                     break;
                 default:
-            }
+            }//fim do switch
+        }else{
+            vezJogada--;
         }
-        //sai.textContent = "X";
     } else {
-        if (tabuleiro[linha][coluna] != "") {
+        if (tabuleiro[linha][coluna] == "") {
 
             tabuleiro[linha][coluna] = "O";
-            switch (i) {
+            switch (index) {
                 case 1:
                     //  outq1.textContent = "0";
                     icones.className = "far fa-circle"
@@ -130,7 +131,9 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
                     sai9.appendChild(icones);
                     break;
                 default:
-            }
+            }//fim do switch
+        }else{
+            vezJogada--;
         }
     }
     //alert(tabuleiro[linha][coluna]);
