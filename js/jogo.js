@@ -181,6 +181,7 @@ function verificarFimDeJogo() {
         }    
         sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");        
     } else if (vezJogada > 9) {
+        
         //ganhou = true;
         alert("Ninguém ganhou essa partida");
     }
