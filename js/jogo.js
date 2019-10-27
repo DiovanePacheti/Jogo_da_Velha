@@ -43,7 +43,7 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
 
 
     if (vezJogada % 2 != 0) {//jogador 1 - sempre que a variavel vezjogada tiver valor impar
-        if (tabuleiro[linha][coluna] == "") {//verifica se o tabuleiro esta vazio nesta posição
+        if (tabuleiro[linha][coluna] == "" || tabuleiro[linha][coluna] == undefined) {//verifica se o tabuleiro esta vazio nesta posição
 
             tabuleiro[linha][coluna] = "X";//adiciona sinal x para matriz
             switch (index) {//verifica  qual valor da variavel index para selecionar saida
@@ -90,7 +90,7 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
             vezJogada--;
         }
     } else {
-        if (tabuleiro[linha][coluna] == "") {
+        if (tabuleiro[linha][coluna] == "" || tabuleiro[linha][coluna] == undefined) {
 
             tabuleiro[linha][coluna] = "O";
             switch (index) {
@@ -157,6 +157,7 @@ function verificarFimDeJogo() {
         alert("Parabéns, jogador 1 ganhou!");
         vitoria1++
         sel1.textContent = "Vitoria(s) " + vitoria1;
+        limpaTabuleiro();
     } else if ((tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O') ||  // linha 1
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||  // linha 2
         (tabuleiro[2][0] == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||  // linha 3
@@ -166,7 +167,11 @@ function verificarFimDeJogo() {
         (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O')) {  // diagonal
         //ganhou = true;
         alert("Parabéns, jogador 2 ganhou!");
-        vitoria2++
+        vitoria2++;
+        sel2.textContent = "Vitoria(s) " + vitoria1;
+        limpaTabuleiro();
+
+                /*
         if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
             vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
             vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
@@ -179,13 +184,40 @@ function verificarFimDeJogo() {
             localStorage.setItem("vitoriaPlayer2", vitoria2);
     
         }    
-        sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");        
-    } else if (vezJogada > 9) {
-        
+            sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");        */
+        } else if (vezJogada > 9) {
+            
         //ganhou = true;
         alert("Ninguém ganhou essa partida");
+        limpaTabuleiro();
     }
 }//fim da função que verificar o fim do jogo
+
+function limpaTabuleiro (){
+    window.location.reload();
+    //icones = document.getElementsByTagName('i');//criando um elemento "i" 
+  /*  for(var i = 1; i <= 9; i++){ 
+    var no = document.getElementById("sai"+i);
+     no.parentNode.removeChild(no);
+     
+    }
+    for(var i = 0; i < 3; i++){
+        for(var j = 0; j < 3; j++){
+            tabuleiro[i][j] = "";
+        }
+    }
+    alert(tabuleiro);
+    escolherPosicaoTabuleiro();*/
+   
+}
+
+
+
+
+
+
+
+
 
 //  === LOCAL STORAGE ==== 
 /*function setandolocal(opcao){
