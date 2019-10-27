@@ -4,16 +4,8 @@ var tabuleiro = [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""]
-]// var tabuleiro.new Array();
+]// 
 
-/*
-var liquadro1 =["1","2 ","3 "],
-    liquadro2 =[" 4","5X","6 "],
-    liquadro3 =[" 7","8 ","9X"];
-
-tabuleiro.push(liquadro1);
-tabuleiro.push(liquadro2);
-tabuleiro.push(liquadro3);    */
 var vezJogada = 1; // variavel que ira verificar a vez dos jogadores 
 
 // crainado as referencias aos elementos da pagina do tabulario
@@ -26,6 +18,12 @@ var outq6 = document.getElementById("outq6");
 var outq7 = document.getElementById("outq7");
 var outq8 = document.getElementById("outq8");
 var outq9 = document.getElementById("outq9");
+var sel1 = document.getElementById("sel1");
+var sel2 = document.getElementById("sel2");
+var vitoria1 = 0;
+var vitoria2 = 0;
+
+
 
 //chamando a function que ira setar o sinal do jogador da vez
 outq1.addEventListener('click', function () { escolherPosicaoTabuleiro(0, 0, 1) });
@@ -39,17 +37,17 @@ outq8.addEventListener('click', function () { escolherPosicaoTabuleiro(2, 1, 8) 
 outq9.addEventListener('click', function () { escolherPosicaoTabuleiro(2, 2, 9) });
 
 function escolherPosicaoTabuleiro(linha, coluna, index) {
-    var icones = document.createElement('i');//criando um elemento i para ser criado a class do fontasow
+    var icones = document.createElement('i');//criando um elemento "i" 
 
 
     if (vezJogada % 2 != 0) {//jogador 1 - sempre que a variavel vezjogada tiver valor impar
         if (tabuleiro[linha][coluna] == "") {//verifica se o tabuleiro esta vazio nesta posição
 
-            tabuleiro[linha][coluna] = "X";//adiciona sinal x para vetor 
+            tabuleiro[linha][coluna] = "X";//adiciona sinal x para matriz
             switch (index) {//verifica  qual valor da variavel index para selecionar saida
                 case 1://caso 1
-                    icones.className = "fas fa-times" //criando class do font no elemento i que  
-                    sai1.appendChild(icones);//definindo qual id ela pertence
+                    icones.className = "fas fa-times" //criando class do font awesome no elemento 'i' 
+                    sai1.appendChild(icones);//definindo qual id esse elemento criado pertence
                     break;//quebrando 
                 case 2:
                     icones.className = "fas fa-times"
@@ -85,7 +83,8 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
                     break;
                 default:
             }//fim do switch
-        }else{
+            
+        }else if(tabuleiro[linha][coluna] == "X" || tabuleiro[linha][coluna] == "O"){
             vezJogada--;
         }
     } else {
@@ -132,7 +131,8 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
                     break;
                 default:
             }//fim do switch
-        }else{
+        }else if(tabuleiro[linha][coluna] == "X" || tabuleiro[linha][coluna] == "O"){
+            
             vezJogada--;
         }
     }
@@ -153,6 +153,8 @@ function verificarFimDeJogo() {
         (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X')) {  // diagonal
         // ganhou = true;
         alert("Parabéns, jogador 1 ganhou!");
+        vitoria1++
+        sel1.textContent = "Vitoria(s) " + vitoria1;
     } else if ((tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O') ||  // linha 1
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||  // linha 2
         (tabuleiro[2][0] == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||  // linha 3
@@ -162,20 +164,29 @@ function verificarFimDeJogo() {
         (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O')) {  // diagonal
         //ganhou = true;
         alert("Parabéns, jogador 2 ganhou!");
+        vitoria2++
+        setandolocal(vitoria2)
+        
     } else if (vezJogada > 9) {
         //ganhou = true;
         alert("Ninguém ganhou essa partida");
     }
 }//fim da função que verificar o fim do jogo
 
-/*if(tabuleiro[linha][coluna] != null){
+//  === LOCAL STORAGE ==== 
+function setandolocal(){
+    if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
+        var vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
+        var vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
 
-for(var i = 1; i < linha; i++){
-    for(var j = 1; j < coluna; j++  ){
-        tabuleiro[linha][coluna] = "0";
+        // salva os dados em localStorage
+        localStorage.setItem("vitoriaPlayer1", vitoriaPlayer1);
+        localStorage.setItem("vitoriaPlayer2", vitoriaPlayer2);
+
+    }else{
+        localStorage.setItem("vitoriaPlayer1", vitoria1);
+        localStorage.setItem("vitoriaPlayer2", vitoria2);
+
     }
 }
-}else{
-    alert("posição ocupada !")
-}
-verificarFimDeJogo();*/
+sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");
