@@ -22,6 +22,8 @@ var sel1 = document.getElementById("sel1");
 var sel2 = document.getElementById("sel2");
 var vitoria1 = 0;
 var vitoria2 = 0;
+var vitoriaPlayer1 = 0;
+var vitoriaPlayer2 = 0;
 
 
 
@@ -165,8 +167,19 @@ function verificarFimDeJogo() {
         //ganhou = true;
         alert("Parabéns, jogador 2 ganhou!");
         vitoria2++
-        setandolocal(vitoria2)
-        
+        if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
+            vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
+            vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
+           
+            // salva os dados em localStorage
+          
+            localStorage.setItem("vitoriaPlayer2", vitoriaPlayer2);
+    
+        }else{
+            localStorage.setItem("vitoriaPlayer2", vitoria2);
+    
+        }    
+        sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");        
     } else if (vezJogada > 9) {
         //ganhou = true;
         alert("Ninguém ganhou essa partida");
@@ -174,11 +187,11 @@ function verificarFimDeJogo() {
 }//fim da função que verificar o fim do jogo
 
 //  === LOCAL STORAGE ==== 
-function setandolocal(){
+/*function setandolocal(opcao){
     if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
         var vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
         var vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
-
+       
         // salva os dados em localStorage
         localStorage.setItem("vitoriaPlayer1", vitoriaPlayer1);
         localStorage.setItem("vitoriaPlayer2", vitoriaPlayer2);
@@ -188,5 +201,4 @@ function setandolocal(){
         localStorage.setItem("vitoriaPlayer2", vitoria2);
 
     }
-}
-sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");
+}*/
