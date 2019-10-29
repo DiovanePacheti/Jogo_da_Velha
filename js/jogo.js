@@ -87,6 +87,10 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
             }//fim do switch
             
         }else if(tabuleiro[linha][coluna] == "X" || tabuleiro[linha][coluna] == "O"){
+            icones.className = "text-danger"
+            var q = "sai"+index;
+            
+            q.appendChild(icones);
             vezJogada--;
         }
     } else {
@@ -134,7 +138,6 @@ function escolherPosicaoTabuleiro(linha, coluna, index) {
                 default:
             }//fim do switch
         }else if(tabuleiro[linha][coluna] == "X" || tabuleiro[linha][coluna] == "O"){
-            
             vezJogada--;
         }
     }
@@ -152,11 +155,25 @@ function verificarFimDeJogo() {
         (tabuleiro[0][0] == 'X' && tabuleiro[1][0] == 'X' && tabuleiro[2][0] == 'X') ||  // coluna 1
         (tabuleiro[0][1] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][1] == 'X') ||  // coluna 2
         (tabuleiro[0][2] == 'X' && tabuleiro[1][2] == 'X' && tabuleiro[2][2] == 'X') ||  // coluna 3
-        (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X')) {  // diagonal
-        // ganhou = true;
+        (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X') ||  //diagonal
+        (tabuleiro[0][2] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][0] == 'X')) {  // diagonal
+
+        
         alert("Parabéns, jogador 1 ganhou!");
         vitoria1++
-        sel1.textContent = "Vitoria(s) " + vitoria1;
+        var v1 = parseInt(localStorage.getItem("vitoriaPlayer1"));
+
+        if(v1 > 0){
+            alert(v1)
+            
+            alert(v1 + vitoria1);    
+             // salva os dados em localStorage
+           
+             localStorage.setItem("vitoriaPlayer1", vitoria1 + v1);
+           
+        }else if(v1 == NaN || v1 == " " || v1 == undefined ){
+           localStorage.setItem("vitoriaPlayer1", vitoria1);
+        }
         limpaTabuleiro();
     } else if ((tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O') ||  // linha 1
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||  // linha 2
@@ -164,28 +181,42 @@ function verificarFimDeJogo() {
         (tabuleiro[0][0] == 'O' && tabuleiro[1][0] == 'O' && tabuleiro[2][0] == 'O') ||  // coluna 1
         (tabuleiro[0][1] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][1] == 'O') ||  // coluna 2
         (tabuleiro[0][2] == 'O' && tabuleiro[1][2] == 'O' && tabuleiro[2][2] == 'O') ||  // coluna 3
-        (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O')) {  // diagonal
-        //ganhou = true;
-        alert("Parabéns, jogador 2 ganhou!");
-        vitoria2++;
-        sel2.textContent = "Vitoria(s) " + vitoria1;
-        limpaTabuleiro();
+        (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O') ||  // diagonal
+        (tabuleiro[0][2] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][0] == 'O')) {  // diagonal
 
-                /*
-        if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
-            vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
-            vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
+        alert("Parabéns, jogador 2 ganhou!");
+        
+        vitoria2++;
+        v2 = parseInt(localStorage.getItem("vitoriaPlayer2"));
+        if(v2 != 0 ){
+            alert("entro")
+            
+            alert(v2 + vitoria2);    
+             // salva os dados em localStorage
            
-            // salva os dados em localStorage
-          
-            localStorage.setItem("vitoriaPlayer2", vitoriaPlayer2);
+             localStorage.setItem("vitoriaPlayer2", vitoria2 + v2);
+           
+            //localStorage.setItem("vitoriaPlayer2", vitoria2);
     
         }else{
-            localStorage.setItem("vitoriaPlayer2", vitoria2);
+           // vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
+           alert("entroeh")
+           localStorage.setItem("vitoriaPlayer2", vitoria2);
+           
     
-        }    
-            sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");        */
-        } else if (vezJogada > 9) {
+        }
+             
+            limpaTabuleiro();
+            
+
+
+
+
+
+
+
+
+        } else if (vezJogada > 9) {// senão se vez de jgaada passar de 9 jogadas empate
             
         //ganhou = true;
         alert("Ninguém ganhou essa partida");
@@ -194,44 +225,14 @@ function verificarFimDeJogo() {
 }//fim da função que verificar o fim do jogo
 
 function limpaTabuleiro (){
-    window.location.reload();
-    //icones = document.getElementsByTagName('i');//criando um elemento "i" 
-  /*  for(var i = 1; i <= 9; i++){ 
-    var no = document.getElementById("sai"+i);
-     no.parentNode.removeChild(no);
-     
-    }
-    for(var i = 0; i < 3; i++){
-        for(var j = 0; j < 3; j++){
-            tabuleiro[i][j] = "";
+    /*for(var i = 1; i < 3; i++){
+        for(var j = 1; j < 3; j++  ){
+            tabuleiro[linha][coluna] = " ";
         }
-    }
-    alert(tabuleiro);
-    escolherPosicaoTabuleiro();*/
-   
-}
+    }*/
+    window.location.reload();
+}//fim da function limpaTabuleiro
 
 
-
-
-
-
-
-
-
-//  === LOCAL STORAGE ==== 
-/*function setandolocal(opcao){
-    if(localStorage.getItem("vitoriaPlayer1") || localStorage.getItem("vitoriaPayer2")){
-        var vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
-        var vitoriaPlayer2 = localStorage.getItem("vitoriaPlayer2" + vitoria2);
-       
-        // salva os dados em localStorage
-        localStorage.setItem("vitoriaPlayer1", vitoriaPlayer1);
-        localStorage.setItem("vitoriaPlayer2", vitoriaPlayer2);
-
-    }else{
-        localStorage.setItem("vitoriaPlayer1", vitoria1);
-        localStorage.setItem("vitoriaPlayer2", vitoria2);
-
-    }
-}*/
+sel2.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer2");
+sel1.textContent = "Vitoria(s) " + localStorage.getItem("vitoriaPlayer1");
