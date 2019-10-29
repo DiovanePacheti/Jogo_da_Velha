@@ -187,13 +187,13 @@ function verificarFimDeJogo() {
         alert("Parabéns, jogador 2 ganhou!");
         
         vitoria2++;
-        v2 = parseInt(localStorage.getItem("vitoriaPlayer2"));
-        if(v2 != 0 ){
+        var v2 = parseInt(localStorage.getItem("vitoriaPlayer2"));
+        if(v2 > 0 ){
             alert("entro")
-            
+            if(v2 == NaN){
             alert(v2 + vitoria2);    
              // salva os dados em localStorage
-           
+            }    
              localStorage.setItem("vitoriaPlayer2", vitoria2 + v2);
            
             //localStorage.setItem("vitoriaPlayer2", vitoria2);
@@ -225,12 +225,13 @@ function verificarFimDeJogo() {
 }//fim da função que verificar o fim do jogo
 
 function limpaTabuleiro (){
-    /*for(var i = 1; i < 3; i++){
+    window.location.reload();s
+    for(var i = 1; i < 3; i++){
         for(var j = 1; j < 3; j++  ){
             tabuleiro[linha][coluna] = " ";
         }
-    }*/
-    window.location.reload();
+    }
+    
 }//fim da function limpaTabuleiro
 
 
