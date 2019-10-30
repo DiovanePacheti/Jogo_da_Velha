@@ -159,22 +159,32 @@ function verificarFimDeJogo() {
         (tabuleiro[0][2] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][0] == 'X')) {  // diagonal
 
         
-        alert("Parabéns, jogador 1 ganhou!");
-        vitoria1++
-        var v1 = parseInt(localStorage.getItem("vitoriaPlayer1"));
-
-        if(v1 > 0){
-            alert(v1)
-            
-            alert(v1 + vitoria1);    
-             // salva os dados em localStorage
-           
-             localStorage.setItem("vitoriaPlayer1", vitoria1 + v1);
-           
-        }else if(v1 == NaN || v1 == " " || v1 == undefined ){
-           localStorage.setItem("vitoriaPlayer1", vitoria1);
-        }
-        limpaTabuleiro();
+            alert("Parabéns, jogador 2 ganhou!");
+        
+            vitoria1++;
+            var v1 = parseInt(localStorage.getItem("vitoriaPlayer1"));
+            if(v1 > 0 ){
+                alert("sim v1 e maior que zero")
+                if(v1 == NaN){
+                alert("encontrou NaN " + (v1 + vitoria1));    
+                 // salva os dados em localStorage
+                }    
+                 localStorage.setItem("vitoriaPlayer1", vitoria1 + v1);
+               
+                //localStorage.setItem("vitoriaPlayer2", vitoria2);
+        
+            }else{
+               // vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
+               alert("entroeh")
+               localStorage.setItem("vitoriaPlayer1", vitoria1);
+               
+        
+            }
+                 
+                limpaTabuleiro();
+                
+    
+        
     } else if ((tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O') ||  // linha 1
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||  // linha 2
         (tabuleiro[2][0] == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||  // linha 3
