@@ -1,5 +1,7 @@
 
-// criando o tabuleiro
+/* criando o tabuleiro
+ uma Matriz de 3x3 
+*/
 var tabuleiro = [
     ["", "", ""],
     ["", "", ""],
@@ -8,16 +10,16 @@ var tabuleiro = [
 
 var vezJogada = 1; // variavel que ira verificar a vez dos jogadores 
 
-// crainado as referencias aos elementos da pagina do tabulario
-var outq1 = document.getElementById("outq1");
-var outq2 = document.getElementById("outq2");
-var outq3 = document.getElementById("outq3");
-var outq4 = document.getElementById("outq4");
-var outq5 = document.getElementById("outq5");
-var outq6 = document.getElementById("outq6");
-var outq7 = document.getElementById("outq7");
-var outq8 = document.getElementById("outq8");
-var outq9 = document.getElementById("outq9");
+// craindo as referencias aos elementos da pagina do tabulario
+var outq1 = document.getElementById("outq1");//capturando id do quadro 1
+var outq2 = document.getElementById("outq2");//capturando id do quadro 
+var outq3 = document.getElementById("outq3");//capturando id do quadro 
+var outq4 = document.getElementById("outq4");//capturando id do quadro 
+var outq5 = document.getElementById("outq5");//capturando id do quadro 
+var outq6 = document.getElementById("outq6");//capturando id do quadro 
+var outq7 = document.getElementById("outq7");//capturando id do quadro 
+var outq8 = document.getElementById("outq8");//capturando id do quadro 
+var outq9 = document.getElementById("outq9");//capturando id do quadro 
 var sel1 = document.getElementById("sel1");
 var sel2 = document.getElementById("sel2");
 var vitoria1 = 0;
@@ -157,16 +159,13 @@ function verificarFimDeJogo() {
         (tabuleiro[0][2] == 'X' && tabuleiro[1][2] == 'X' && tabuleiro[2][2] == 'X') ||  // coluna 3
         (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X') ||  //diagonal
         (tabuleiro[0][2] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][0] == 'X')) {  // diagonal
-
         
-            alert("Parabéns, jogador 2 ganhou!");
+            alert("Parabéns, jogador 1 ganhou!");
         
             vitoria1++;
             var v1 = parseInt(localStorage.getItem("vitoriaPlayer1"));
             if(v1 > 0 ){
-                alert("sim v1 e maior que zero")
                 if(v1 == NaN){
-                alert("encontrou NaN " + (v1 + vitoria1));    
                  // salva os dados em localStorage
                 }    
                  localStorage.setItem("vitoriaPlayer1", vitoria1 + v1);
@@ -175,16 +174,9 @@ function verificarFimDeJogo() {
         
             }else{
                // vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
-               alert("entroeh")
                localStorage.setItem("vitoriaPlayer1", vitoria1);
-               
-        
             }
-                 
                 limpaTabuleiro();
-                
-    
-        
     } else if ((tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O') ||  // linha 1
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||  // linha 2
         (tabuleiro[2][0] == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||  // linha 3
@@ -199,9 +191,7 @@ function verificarFimDeJogo() {
         vitoria2++;
         var v2 = parseInt(localStorage.getItem("vitoriaPlayer2"));
         if(v2 > 0 ){
-            alert("entro")
             if(v2 == NaN){
-            alert(v2 + vitoria2);    
              // salva os dados em localStorage
             }    
              localStorage.setItem("vitoriaPlayer2", vitoria2 + v2);
@@ -210,25 +200,12 @@ function verificarFimDeJogo() {
     
         }else{
            // vitoriaPlayer1 = localStorage.getItem("vitoriaPlayer1" + vitoria1);
-           alert("entroeh")
            localStorage.setItem("vitoriaPlayer2", vitoria2);
            
     
         }
-             
             limpaTabuleiro();
-            
-
-
-
-
-
-
-
-
         } else if (vezJogada > 9) {// senão se vez de jgaada passar de 9 jogadas empate
-            
-        //ganhou = true;
         alert("Ninguém ganhou essa partida");
         limpaTabuleiro();
     }
